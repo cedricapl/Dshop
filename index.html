@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesignShop - Boutique Créative</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'canva-purple': '#8B5CF6',
+                        'canva-blue': '#3B82F6',
+                        'canva-pink': '#EC4899',
+                        'canva-green': '#10B981'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <button id="mobile-menu-btn" class="md:hidden text-gray-700 hover:text-canva-purple transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-r from-canva-purple to-canva-pink rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">D</span>
+                        </div>
+                        <span class="text-lg sm:text-xl font-bold text-gray-900">DesignShop</span>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="text-gray-700 hover:text-canva-purple font-medium transition-colors">Accueil</a>
+                    <a href="#products" class="text-gray-700 hover:text-canva-purple font-medium transition-colors">Produits</a>
+                    <a href="#" class="text-gray-700 hover:text-canva-purple font-medium transition-colors">Collections</a>
+                    <a href="#" class="text-gray-700 hover:text-canva-purple font-medium transition-colors">À propos</a>
+                </nav>
+                
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <button class="hidden sm:block text-gray-700 hover:text-canva-purple transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    <button id="cart-btn" class="relative text-gray-700 hover:text-canva-purple transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"></path>
+                        </svg>
+                        <span id="cart-count" class="absolute -top-2 -right-2 bg-canva-pink text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                    </button>
+                    <button class="hidden sm:block bg-canva-purple text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium">
+                        Connexion
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t hidden">
+            <div class="px-4 py-4 space-y-4">
+                <a href="#" class="block text-gray-700 hover:text-canva-purple font-medium transition-colors">Accueil</a>
+                <a href="#products" class="block text-gray-700 hover:text-canva-purple font-medium transition-colors">Produits</a>
+                <a href="#" class="block text-gray-700 hover:text-canva-purple font-medium transition-colors">Collections</a>
+                <a href="#" class="block text-gray-700 hover:text-canva-purple font-medium transition-colors">À propos</a>
+                <div class="pt-4 border-t">
+                    <button class="w-full bg-canva-purple text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium">
+                        Connexion
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-12 sm:py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
+                Créez sans limites
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-6 sm:mb-8 text-purple-100 max-w-3xl mx-auto px-4">
+                Découvrez notre collection exclusive d'outils créatifs et de designs premium pour donner vie à vos idées
+            </p>
+            <button class="bg-white text-canva-purple px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-base sm:text-lg hover:bg-gray-100 transition-colors shadow-lg">
+                Explorer maintenant
+            </button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="py-12 sm:py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-900">Nos catégories</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                <div class="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50 card-hover cursor-pointer">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-canva-purple rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                            <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2">Templates</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Modèles professionnels prêts à utiliser</p>
+                </div>
+                <div class="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 card-hover cursor-pointer">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-canva-blue rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2">Outils</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Logiciels et plugins créatifs</p>
+                </div>
+                <div class="text-center p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-green-50 to-emerald-50 card-hover cursor-pointer sm:col-span-2 lg:col-span-1">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-canva-green rounded-2xl mx-auto mb-4 flex items-center justify-center">
+                        <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2">Ressources</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Polices, icônes et éléments graphiques</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-12 sm:py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 sm:mb-12 space-y-4 sm:space-y-0">
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Produits populaires</h2>
+                <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+                    <button class="px-3 sm:px-4 py-2 bg-white rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-sm sm:text-base">Tous</button>
+                    <button class="px-3 sm:px-4 py-2 bg-canva-purple text-white rounded-lg hover:bg-purple-700 transition-colors text-sm sm:text-base">Nouveautés</button>
+                    <button class="px-3 sm:px-4 py-2 bg-white rounded-lg text-gray-700 hover:bg-gray-100 transition-colors text-sm sm:text-base">Tendances</button>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8" id="products-grid">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-12 sm:py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-gray-900">Restez inspiré</h2>
+            <p class="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 px-4">Recevez les dernières tendances et nouveautés directement dans votre boîte mail</p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 max-w-md mx-auto">
+                <input type="email" placeholder="Votre adresse email" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-canva-purple focus:border-transparent outline-none text-base">
+                <button class="bg-canva-purple text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium text-base">
+                    S'abonner
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-canva-purple to-canva-pink rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">D</span>
+                        </div>
+                        <span class="text-xl font-bold">DesignShop</span>
+                    </div>
+                    <p class="text-gray-400">Votre partenaire créatif pour tous vos projets de design.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Produits</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Templates</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Outils</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Ressources</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Centre d'aide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 DesignShop. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="fixed right-0 top-0 h-full w-full sm:w-96 bg-white shadow-xl">
+            <div class="p-4 sm:p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-lg sm:text-xl font-semibold">Panier</h3>
+                    <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="cart-items" class="p-4 sm:p-6 flex-1 overflow-y-auto" style="height: calc(100vh - 200px);">
+                <p class="text-gray-500 text-center">Votre panier est vide</p>
+            </div>
+            <div class="p-4 sm:p-6 border-t bg-white">
+                <div class="flex justify-between items-center mb-4">
+                    <span class="font-semibold text-base sm:text-lg">Total:</span>
+                    <span id="cart-total" class="font-bold text-lg sm:text-xl">0€</span>
+                </div>
+                <button class="w-full bg-canva-purple text-white py-3 rounded-lg hover:bg-purple-700 transition-colors font-medium text-base">
+                    Procéder au paiement
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample products data
+        const products = [
+            {
+                id: 1,
+                name: "Pack Templates Business",
+                price: 29,
+                image: "🎨",
+                category: "Templates",
+                description: "50 templates professionnels pour vos présentations"
+            },
+            {
+                id: 2,
+                name: "Collection Icônes Premium",
+                price: 19,
+                image: "✨",
+                category: "Ressources",
+                description: "1000+ icônes vectorielles haute qualité"
+            },
+            {
+                id: 3,
+                name: "Plugin Design Pro",
+                price: 49,
+                image: "🔧",
+                category: "Outils",
+                description: "Extension avancée pour vos logiciels de design"
+            },
+            {
+                id: 4,
+                name: "Pack Polices Créatives",
+                price: 24,
+                image: "📝",
+                category: "Ressources",
+                description: "25 polices uniques pour vos projets"
+            },
+            {
+                id: 5,
+                name: "Templates Social Media",
+                price: 34,
+                image: "📱",
+                category: "Templates",
+                description: "Templates optimisés pour tous les réseaux sociaux"
+            },
+            {
+                id: 6,
+                name: "Kit Illustrations",
+                price: 39,
+                image: "🎭",
+                category: "Ressources",
+                description: "Illustrations vectorielles modernes et colorées"
+            },
+            {
+                id: 7,
+                name: "Outil Animation",
+                price: 59,
+                image: "🎬",
+                category: "Outils",
+                description: "Créez des animations fluides facilement"
+            },
+            {
+                id: 8,
+                name: "Pack Mockups",
+                price: 27,
+                image: "📐",
+                category: "Templates",
+                description: "Mockups réalistes pour présenter vos créations"
+            }
+        ];
+
+        let cart = [];
+
+        // Render products
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = products.map(product => `
+                <div class="bg-white rounded-2xl shadow-sm card-hover overflow-hidden">
+                    <div class="p-4 sm:p-6 text-center">
+                        <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">${product.image}</div>
+                        <h3 class="font-semibold text-base sm:text-lg mb-2 text-gray-900">${product.name}</h3>
+                        <p class="text-gray-600 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2">${product.description}</p>
+                        <div class="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-0">
+                            <span class="text-xl sm:text-2xl font-bold text-canva-purple">${product.price}€</span>
+                            <button onclick="addToCart(${product.id})" class="w-full sm:w-auto bg-canva-purple text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors font-medium text-sm sm:text-base">
+                                Ajouter
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+            
+            updateCartUI();
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = `${totalPrice}€`;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-gray-500 text-center">Votre panier est vide</p>';
+            } else {
+                cartItems.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center py-3 border-b">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">${item.image}</span>
+                            <div>
+                                <h4 class="font-medium">${item.name}</h4>
+                                <p class="text-sm text-gray-600">${item.price}€ x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Remove from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        // Mobile menu functionality
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Cart modal functionality
+        document.getElementById('cart-btn').addEventListener('click', () => {
+            document.getElementById('cart-modal').classList.remove('hidden');
+        });
+
+        document.getElementById('close-cart').addEventListener('click', () => {
+            document.getElementById('cart-modal').classList.add('hidden');
+        });
+
+        document.getElementById('cart-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'cart-modal') {
+                document.getElementById('cart-modal').classList.add('hidden');
+            }
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Initialize
+        renderProducts();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98120fe8a2f2cfc2',t:'MTc1ODIxMTI4OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
